@@ -25,20 +25,61 @@
             width: 100vw;
             min-height: 100vh;
         }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .header-bar {
             width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+            box-sizing: border-box;
+            background: #fff;
+            min-height: 60px;
+            gap: 2rem;
         }
-        header img {
-            height: 60px;
+        .header-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2rem;
         }
-        h1 {
-            color: #1a237e;
-            margin: 0;
+        .display-info {
+            background: #fff;
+            border: 1.5px solid #e0e7ef;
+            border-radius: 20px;
+            padding: 0.4rem 1.2rem;
+            color: #444;
+            font-size: 1rem;
+            box-shadow: 0 1px 4px rgba(30,34,90,0.04);
+        }
+        .header-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5a4fcf;
+            letter-spacing: 0.01em;
+            margin-left: 0.5rem;
+        }
+        .header-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        .header-nav a {
+            text-decoration: none;
+            color: #222;
+            font-size: 1.08rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+            /* Reservar espacio para el cambio de peso */
+            display: inline-block;
+            min-width: 110px;
+            text-align: center;
+        }
+        .header-nav a:hover {
+            color: #5a4fcf;
+            font-weight: 700;
         }
         main {
             background: #fff;
@@ -81,23 +122,63 @@
             display: none;
             align-self: center;
         }
+        @media (max-width: 900px) {
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem 1rem 1rem 1rem;
+            }
+            .header-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .header-title {
+                font-size: 1.3rem;
+            }
+            .header-nav {
+                gap: 1.2rem;
+            }
+        }
         @media (max-width: 500px) {
             main {
                 padding: 1rem 0.5rem;
             }
-            header {
+            .header-bar {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 0.5rem;
+                padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            }
+            .header-title {
+                font-size: 1.1rem;
+            }
+            .header-nav {
+                gap: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
+    <header class="header-bar">
+        <div class="header-left">
+            <span class="header-title">TuPrendario.com</span>
+        </div>
+        <nav class="header-nav">
+            <a href="#calculadora">Calculadora</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#preaprobado">Preaprobado</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+    <footer class="footer-info-line">
+        <span class="display-info">
+            Display: <span id="display-width"></span>px &nbsp;|&nbsp; Muy Grandes: ≥992px &nbsp;|&nbsp; Grandes: 768-991px &nbsp;|&nbsp; Medianas: 600-767px &nbsp;|&nbsp; Tablets: 480-599px &nbsp;|&nbsp; Celulares: <480px
+        </span>
+    </footer>
+    </header>
     <div class="container-flex">
-        <header>
-            <img src="Imagenes/logoTuPrendario.avif" alt="Logo Tu Prendario">
-            <h1>Bienvenido a Tu Prendario</h1>
-        </header>
         <main>
             <div class="main-flex">
                 <p>¡Gracias por visitar nuestra experiencia web moderna!</p>
@@ -107,6 +188,13 @@
         </main>
     </div>
     <script>
+        // Mostrar el ancho real del display en el header
+        function actualizarDisplayWidth() {
+            document.getElementById('display-width').textContent = window.innerWidth;
+        }
+        window.addEventListener('resize', actualizarDisplayWidth);
+        window.addEventListener('DOMContentLoaded', actualizarDisplayWidth);
+
         document.getElementById('btnSaludo').addEventListener('click', function() {
             const mensaje = document.getElementById('mensajeSaludo');
             mensaje.style.display = 'block';
